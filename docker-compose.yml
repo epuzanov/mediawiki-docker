@@ -1,0 +1,67 @@
+version: '2'
+
+services:
+    db:
+        container_name: db
+        image: mariadb
+        restart: always
+        volumes:
+            - wikidb:/var/lib/mysql:rw
+        networks:
+            - wiki_network
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+    mwlib:
+        container_name: mwlib
+        image: mwlib:latest
+        build:
+            context: ./mwlib-docker
+            #args:
+            #    - http_proxy=http://proxy:port
+            #    - https_proxy=http://proxy:port
+        restart: always
+        networks:
+            - wiki_network
+        volumes:
+            - mwcache:/var/cache/mwlib:rw
+    wiki:
+        container_name: wiki
+        image: mediawiki:latest
+        build:
+            context: ./mediawiki-docker
+            #args:
+            #    - http_proxy=http://proxy:port
+            #    - https_proxy=http://proxy:port
+        depends_on:
+            - db
+        restart: always
+        ports:
+            - 80:81
+            - 443:443
+        networks:
+            - wiki_network
+        volumes:
+            - wikiconfig:/etc/mediawiki:rw
+            - wikiimages:/var/www/html/images:rw
+        environment:
+            - MEDIAWIKI_VERSION=REL1_28
+            - MEDIAWIKI_SITE_SERVER=//wiki
+            - MEDIAWIKI_SITE_NAME=MediaWiki
+            - MEDIAWIKI_SITE_LANG=en
+            - MEDIAWIKI_ADMIN_USER=admin
+            - MEDIAWIKI_ADMIN_PASS=password
+            - MEDIAWIKI_DB_TYPE=mysql
+            - MEDIAWIKI_DB_HOST=db
+            - MEDIAWIKI_DB_PORT=3306
+            - MEDIAWIKI_DB_SCHEMA=mediawiki
+            - MEDIAWIKI_DB_INSTALL_USER=root
+            - MEDIAWIKI_DB_INSTALL_PASSWORD=password
+            - MEDIAWIKI_DB_NAME=wikidb
+            - MEDIAWIKI_UPDATE=true
+networks:
+    wiki_network:
+volumes:
+    wikidb:
+    mwcache:
+    wikiconfig:
+    wikiimages:
