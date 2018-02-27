@@ -1,0 +1,23 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd" version="0.10" xml:lang="en">
+  <page>
+    <title>Template:Saved book</title>
+    <ns>10</ns>
+    <id>2</id>
+    <revision>
+      <id>2</id>
+      <timestamp>2018-02-03T20:55:35Z</timestamp>
+      <contributor>
+        <username>Admin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Created page with &quot;&lt;center&gt; &lt;big&gt;[&amp;nbsp;&lt;span class=&quot;plainlinks&quot; title=&quot;Download a PDF version of this book, optimized for A4 paper (8.3 × 11.7 in, 210 × 297 mm).&quot;&gt;[{{fullurl:Special:Book|book...&quot;</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve" bytes="1920">&lt;center&gt;
+&lt;big&gt;[&amp;nbsp;&lt;span class=&quot;plainlinks&quot; title=&quot;Download a PDF version of this book, optimized for A4 paper (8.3 × 11.7 in, 210 × 297 mm).&quot;&gt;[{{fullurl:Special:Book|bookcmd=render_collection&amp;amp;colltitle={{FULLPAGENAMEE}}&amp;amp;writer=rl}} PDF{{#ifexpr: {{{seiten|0}}}&gt;0|&amp;nbsp;({{{pages}}} pages)}}]&lt;/span&gt;&amp;nbsp;]&amp;nbsp; [&amp;nbsp;&lt;span class=&quot;plainlinks&quot; title=&quot;Download a PDF version of this book, optimized for A4 paper (8.3 × 11.7 in, 210 × 297 mm).&quot;&gt;[{{fullurl:Special:Book|bookcmd=render_collection&amp;amp;colltitle={{FULLPAGENAMEE}}&amp;amp;writer=epub}} epub{{#ifexpr: {{{seiten|0}}}&gt;0|&amp;nbsp;({{{pages}}} pages)}}]&lt;/span&gt;&amp;nbsp;]&amp;nbsp; [&amp;nbsp;&lt;span class=&quot;plainlinks&quot; title=&quot;Download an OpenDocument version of this book, which can be further edited with OpenOffice&quot;&gt;[{{fullurl:Special:Book|bookcmd=render_collection&amp;amp;colltitle={{FULLPAGENAMEE}}&amp;amp;writer=odf}} ODT]&lt;/span&gt;&amp;nbsp;]&amp;nbsp; [&amp;nbsp;&lt;span class=&quot;plainlinks&quot; title=&quot;Download a ZIM version of this book, which can be viewed in offline readers like Kiwix&quot;&gt;[{{fullurl:Special:Book|bookcmd=render_collection&amp;amp;colltitle={{FULLPAGENAMEE}}&amp;amp;writer=zim}} ZIM]&lt;/span&gt;&amp;nbsp;]&lt;/big&gt;
+&lt;big&gt;[&amp;nbsp;&lt;span class=&quot;plainlinks&quot; title=&quot;Open this book using MediaWiki's book editing tool. The Book Creator allows you to easily add or remove articles, create or remove chapters, download and print PDF and ODT versions, and more.&quot;&gt;[{{fullurl:Special:Book|bookcmd=load_collection&amp;amp;colltitle={{FULLPAGENAMEE}}}} Open in Book Creator]&lt;/span&gt;&amp;nbsp;]&amp;nbsp; [&amp;nbsp;&lt;span class=&quot;plainlinks&quot; title=&quot;Preview this book with PediaPress, choose a cover image, pick a color for the cover, and more. The printed book is a softcover in A5 format (5.8 × 8.3 in, 148 × 210 mm), with professional-quality layout and printing.&quot;&gt;[{{fullurl:Special:Book|bookcmd=order_collection&amp;amp;colltitle={{FULLPAGENAMEE}}&amp;amp;partner=pediapress}} Order Printed Book]&lt;/span&gt;&amp;nbsp;]&lt;/big&gt;
+&lt;/center&gt;</text>
+      <sha1>p4vxrczn737dj3gpegxfcapdd3xqt3j</sha1>
+    </revision>
+  </page>
+</mediawiki>
