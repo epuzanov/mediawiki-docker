@@ -189,6 +189,7 @@ if [ ! -e "$MEDIAWIKI_SHARED/LocalSettings.php" ]; then
     echo "ini_set('memory_limit', \$wgMaxUploadSize + 2048);" >> $MEDIAWIKI_SHARED/LocalSettings.php
     echo "" >> $MEDIAWIKI_SHARED/LocalSettings.php
     echo "# Permissions" >> $MEDIAWIKI_SHARED/LocalSettings.php
+    echo "\$wgBlockDisablesLogin = true;" >> $MEDIAWIKI_SHARED/LocalSettings.php
     echo "\$wgGroupPermissions['*']['read'] = false;" >> $MEDIAWIKI_SHARED/LocalSettings.php
     if [ -d $MEDIAWIKI_BASEDIR/extensions/ParserFunctions ]; then
         echo "" >> $MEDIAWIKI_SHARED/LocalSettings.php
