@@ -109,13 +109,7 @@ fi
 
 if [ ! -d $MEDIAWIKI_SHARED/images ]; then
     mkdir $MEDIAWIKI_SHARED/images
-    cp $MEDIAWIKI_BASEDIR/resources/assets/wiki.png $MEDIAWIKI_SHARED/images/wiki.png
     chown -R $MEDIAWIKI_HTTPD_USERGROUP $MEDIAWIKI_SHARED/images
-fi
-
-if [ $MEDIAWIKI_DB_TYPE = 'sqlite' -a ! -d $MEDIAWIKI_SHARED/data ]; then
-    mkdir $MEDIAWIKI_SHARED/data
-    chown -R $MEDIAWIKI_HTTPD_USERGROUP $MEDIAWIKI_SHARED/data
 fi
 
 if [ ! -e "$MEDIAWIKI_SHARED/wiki.png" ]; then
@@ -123,6 +117,11 @@ if [ ! -e "$MEDIAWIKI_SHARED/wiki.png" ]; then
 fi
 
 if [ ! -e "$MEDIAWIKI_SHARED/LocalSettings.php" ]; then
+    if [ $MEDIAWIKI_DB_TYPE = 'sqlite' -a ! -d $MEDIAWIKI_SHARED/data ]; then
+        mkdir $MEDIAWIKI_SHARED/data
+        chown -R $MEDIAWIKI_HTTPD_USERGROUP $MEDIAWIKI_SHARED/data
+    fi
+
     if [ $MEDIAWIKI_DB_PORT != '0' ]; then
         # Wait for the DB to come up
         while [ `ncat -w 3 $(echo $MEDIAWIKI_DB_HOST | cut -d/ -f1) $MEDIAWIKI_DB_PORT < /dev/null > /dev/null; echo $?` != 0 ]; do
@@ -235,7 +234,7 @@ if [ ! -e "$MEDIAWIKI_SHARED/LocalSettings.php" ]; then
         echo "\$wgLDAPPreferences = array( \"AD\"=>array( \"email\"=>\"mail\", \"realname\"=>\"displayname\" ) );" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgLDAPUseLDAPGroups = array( \"AD\"=>true );" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgLDAPActiveDirectory = array( \"AD\"=>true );" >> $MEDIAWIKI_SHARED/LocalSettings.php
-        echo "\$wgLDAPRequiredGroups =array( \"AD\"=>array( \"$MEDIAWIKI_LDAP_REQUIRED_GROUPS\" ));" >> $MEDIAWIKI_SHARED/LocalSettings.php
+        echo "\$wgLDAPRequiredGroups = array( \"AD\"=>array( \"$MEDIAWIKI_LDAP_REQUIRED_GROUPS\" ));" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgLDAPUseSSL = false;" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgLDAPUseLocal = false;" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgLDAPAddLDAPUsers = false;" >> $MEDIAWIKI_SHARED/LocalSettings.php
@@ -252,8 +251,8 @@ if [ ! -e "$MEDIAWIKI_SHARED/LocalSettings.php" ]; then
         echo "\$wgGroupPermissions['autoconfirmed']['collectionsaveascommunitypage'] = true;" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgCollectionPODPartners = false;" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgCollectionFormats = array('rl' => 'PDF', 'odf' => 'ODT');" >> $MEDIAWIKI_SHARED/LocalSettings.php
-        echo "\$wgCollectionMWServeURL=\"http://mwlib:8899\";" >> $MEDIAWIKI_SHARED/LocalSettings.php
-        echo "\$wgCollectionMWServeCredentials=\"mwlib:$MEDIAWIKI_MWLIB_PASS\";" >> $MEDIAWIKI_SHARED/LocalSettings.php
+        echo "\$wgCollectionMWServeURL = \"http://mwlib:8899\";" >> $MEDIAWIKI_SHARED/LocalSettings.php
+        echo "\$wgCollectionMWServeCredentials = \"mwlib:$MEDIAWIKI_MWLIB_PASS\";" >> $MEDIAWIKI_SHARED/LocalSettings.php
         php maintenance/createAndPromote.php --bot --conf $MEDIAWIKI_SHARED/LocalSettings.php mwlib $MEDIAWIKI_MWLIB_PASS
     fi
     if [ -e "$MEDIAWIKI_SHARED/dump.xml" ]; then
