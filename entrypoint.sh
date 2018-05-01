@@ -250,7 +250,7 @@ if [ ! -e "$MEDIAWIKI_SHARED/LocalSettings.php" ]; then
         echo "\$wgGroupPermissions['user']['collectionsaveasuserpage'] = true;" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgGroupPermissions['autoconfirmed']['collectionsaveascommunitypage'] = true;" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgCollectionPODPartners = false;" >> $MEDIAWIKI_SHARED/LocalSettings.php
-        echo "\$wgCollectionFormats = array('rl' => 'PDF', 'odf' => 'ODT');" >> $MEDIAWIKI_SHARED/LocalSettings.php
+        echo "\$wgCollectionFormats = array('rl' => 'PDF', 'odf' => 'ODT', 'epub' => 'e-book (EPUB)', 'zim' => 'Kiwix (OpenZIM)');" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgCollectionMWServeURL = \"http://mwlib:8899\";" >> $MEDIAWIKI_SHARED/LocalSettings.php
         echo "\$wgCollectionMWServeCredentials = \"mwlib:$MEDIAWIKI_MWLIB_PASS\";" >> $MEDIAWIKI_SHARED/LocalSettings.php
         php maintenance/createAndPromote.php --bot --conf $MEDIAWIKI_SHARED/LocalSettings.php mwlib $MEDIAWIKI_MWLIB_PASS
