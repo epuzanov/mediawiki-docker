@@ -4,13 +4,13 @@ MAINTAINER Egor Puzanov
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ARG MEDIAWIKI_VERSION=REL1_30
+ARG MEDIAWIKI_VERSION=REL1_31
 ENV MEDIAWIKI_VERSION $MEDIAWIKI_VERSION
 
-ARG MEDIAWIKI_SKINS="CologneBlue Modern MonoBook Vector"
+ARG MEDIAWIKI_SKINS="MonoBook Timeless Vector"
 ENV MEDIAWIKI_SKINS $MEDIAWIKI_SKINS
 
-ARG MEDIAWIKI_EXTENSIONS="Cite CiteThisPage Collection ConfirmEdit Gadgets ImageMap InputBox Interwiki LdapAuthentication LocalisationUpdate Nuke ParserFunctions PdfHandler Poem Renameuser SpamBlacklist SyntaxHighlight_GeSHi TitleBlacklist VisualEditor"
+ARG MEDIAWIKI_EXTENSIONS="CategoryTree Cite CiteThisPage CodeEditor Collection ConfirmEdit Gadgets ImageMap InputBox Interwiki LdapAuthentication LocalisationUpdate MultimediaViewer OATHAuth ParserFunctions PdfHandler Poem Renameuser ReplaceText SpamBlacklist SyntaxHighlight_GeSHi TitleBlacklist VisualEditor WikiEditor"
 ENV MEDIAWIKI_EXTENSIONS $MEDIAWIKI_EXTENSIONS
 
 RUN mkdir /data && \

@@ -157,7 +157,9 @@ if [ ! -e "$MEDIAWIKI_SHARED/LocalSettings.php" ]; then
 
     cd extensions
     for EXT in */ ; do
-        if [ -e "${EXT:0:-1}/${EXT:0:-1}.php" ]; then
+        if [ "${EXT:0:-1}" == "VisualEditor" ]; then
+            echo "#require_once \"\$IP/extensions/VisualEditor/VisualEditor.php\";" >> $MEDIAWIKI_SHARED/LocalSettings.php
+        elif [ -e "${EXT:0:-1}/${EXT:0:-1}.php" ]; then
             echo "require_once \"\$IP/extensions/${EXT:0:-1}/${EXT:0:-1}.php\";" >> $MEDIAWIKI_SHARED/LocalSettings.php
         else
             echo "wfLoadExtension( '${EXT:0:-1}' );" >> $MEDIAWIKI_SHARED/LocalSettings.php
@@ -262,9 +264,19 @@ if [ ! -e "$MEDIAWIKI_SHARED/LocalSettings.php" ]; then
             php maintenance/importDump.php --conf $MEDIAWIKI_SHARED/LocalSettings.php $MEDIAWIKI_BASEDIR/maintenance/default.xml
         fi
     fi
+    if [ -d "./extensions/OATHAuth" ]; then
+        php maintenance/update.php --quick --conf $MEDIAWIKI_SHARED/LocalSettings.php
+    fi
 fi
 
 if [ -e "$MEDIAWIKI_SHARED/LocalSettings.php" -a $MEDIAWIKI_UPDATE = true ]; then
+    sed -i "s/'SqlBagOStuff'/SqlBagOStuff::class/g" $MEDIAWIKI_SHARED/LocalSettings.php
+    sed -i "s/CologneBlue/Timeless/g" $MEDIAWIKI_SHARED/LocalSettings.php
+    sed -i "/wfLoadSkin. 'Modern' .;/d" $MEDIAWIKI_SHARED/LocalSettings.php
+    sed -i "/.*Nuke.php.;/d" $MEDIAWIKI_SHARED/LocalSettings.php
+    sed -i "s/.*ConfirmEdit.php.;/wfLoadExtension( 'ConfirmEdit' );/g" $MEDIAWIKI_SHARED/LocalSettings.php
+    sed -i "s/.*SpamBlacklist.php.;/wfLoadExtension( 'SpamBlacklist' );/g" $MEDIAWIKI_SHARED/LocalSettings.php
+    sed -i "s/.*TitleBlacklist.php.;/wfLoadExtension( 'TitleBlacklist' );/g" $MEDIAWIKI_SHARED/LocalSettings.php
     cd $MEDIAWIKI_BASEDIR
     php maintenance/update.php --quick --conf $MEDIAWIKI_SHARED/LocalSettings.php
 fi
