@@ -25,7 +25,7 @@ Use the following environmental variables to generate a `LocalSettings.php` and 
  - `-e MEDIAWIKI_SITE_NAME=` (defaults to `MediaWiki`; configures `$wgSitename`)
  - `-e MEDIAWIKI_SITE_LANG=` (defaults to `en`; configures `$wgLanguageCode`)
  - `-e MEDIAWIKI_ADMIN_USER=` (defaults to `admin`; configures default administrator username)
- - `-e MEDIAWIKI_ADMIN_PASS=` (defaults to `password`; configures default administrator password)
+ - `-e MEDIAWIKI_ADMIN_PASS=` (defaults to `Pa55word+`; configures default administrator password)
  - `-e MEDIAWIKI_UPDATE=true` (defaults to `false`; run `php maintenance/update.php`)
  - `-e MEDIAWIKI_DB_TYPE=` (defaults to `sqlite`; configures `$wgDBtype`)
  - `-e MEDIAWIKI_DB_HOST=` (defaults to `db`; configures `$wgDBserver`)
