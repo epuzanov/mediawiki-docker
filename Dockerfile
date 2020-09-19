@@ -4,27 +4,18 @@ MAINTAINER Egor Puzanov
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ARG MEDIAWIKI_VERSION=REL1_34
+ARG MEDIAWIKI_VERSION=1.34.2
 ENV MEDIAWIKI_VERSION $MEDIAWIKI_VERSION
 
-ARG MEDIAWIKI_SKINS="MonoBook Timeless Vector"
-ENV MEDIAWIKI_SKINS $MEDIAWIKI_SKINS
-
-ARG MEDIAWIKI_EXTENSIONS="CategoryTree Cite CiteThisPage CodeEditor Collection ConfirmEdit Gadgets ImageMap InputBox Interwiki LdapAuthentication LocalisationUpdate MultimediaViewer OATHAuth ParserFunctions PdfHandler Poem Renameuser ReplaceText SpamBlacklist SyntaxHighlight_GeSHi TitleBlacklist VisualEditor WikiEditor"
+ARG MEDIAWIKI_EXTENSIONS="Collection LdapAuthentication VisualEditor"
 ENV MEDIAWIKI_EXTENSIONS $MEDIAWIKI_EXTENSIONS
 
 RUN mkdir /data && \
     rm -f /var/www/html/* && \
     cd /var/www && \
-    git clone --depth 1 -b $MEDIAWIKI_VERSION https://gerrit.wikimedia.org/r/mediawiki/core.git html && \
-    cd html && \
-    git clone -b $MEDIAWIKI_VERSION https://gerrit.wikimedia.org/r/mediawiki/vendor.git vendor && \
-    cd skins && \
-    for SKIN in $MEDIAWIKI_SKINS ; do git clone -b $MEDIAWIKI_VERSION https://gerrit.wikimedia.org/r/mediawiki/skins/$SKIN.git && \
-    rm -rf $SKIN/.git* $SKIN/.js* ; done && \
-    cd ../extensions && \
-    rm -rf * && \
-    for EXT in $MEDIAWIKI_EXTENSIONS ; do git clone -b $MEDIAWIKI_VERSION https://gerrit.wikimedia.org/r/mediawiki/extensions/$EXT.git && \
+    git clone --depth 1 --recurse-submodules -b $MEDIAWIKI_VERSION https://gerrit.wikimedia.org/r/mediawiki/core.git html && \
+    cd html/extensions && \
+    for EXT in $MEDIAWIKI_EXTENSIONS ; do git clone --depth 1 --recurse-submodules -b $(echo $MEDIAWIKI_VERSION | sed "s/\([0-9]*\)\.\([0-9]*\).*/REL\1_\2/") https://gerrit.wikimedia.org/r/mediawiki/extensions/$EXT.git && \
     cd $EXT && \
     git submodule update --init && \
     cd .. && \
